@@ -5,10 +5,8 @@ This is a modern **Bus Ticket Booking Web App** built with **Angular 19.2.10**. 
 ## 🔧 Tech Stack
 
 - **Frontend:** Angular 19
-- **Styling:** SCSS / TailwindCSS (optional)
-- **State Management:** RxJS / NgRx (optional)
-- **Forms:** Reactive Forms
-- **Testing:** Karma & Jasmine
+- **Styling:** Css
+
 
 ---
 
