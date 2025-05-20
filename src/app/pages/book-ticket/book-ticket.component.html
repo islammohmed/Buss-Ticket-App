@@ -1,0 +1,137 @@
+        <!-- Seat Selection Section -->
+        <div class="container my-5">
+            <div class="row">
+                <!-- Bus Details -->
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="card-title mb-1">{{scheduleData.busName}}</h5>
+                                    <p class="text-muted mb-0">
+                                        <i class="bi bi-calendar3 me-2"></i>{{scheduleData.departureTime | date:'dd MMM yyyy'}}
+                                        <span class="mx-2">•</span>
+                                        <i class="bi bi-clock me-2"></i>{{scheduleData.departureTime | date:'HH:mm'}} - {{scheduleData.arrivalTime | date:'HH:mm'}}
+                                    </p>
+                                </div>
+                                <div class="text-end">
+                                    <h6 class="mb-1">{{scheduleData.busName}}</h6>
+                                    <p class="text-muted mb-0">Duration: 8h 30m</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seat Layout -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="card-title mb-0">Select Seats</h5>
+                                <div class="seat-legend">
+                                    <span class="me-3"><i class="bi bi-square me-1"></i>Available</span>
+                                    <span class="me-3"><i
+                                            class="bi bi-square-fill text-secondary me-1"></i>Booked</span>
+                                    <span><i class="bi bi-square-fill text-primary me-1"></i>Selected</span>
+                                </div>
+                            </div>
+
+                            <div class="bus-layout">
+                                <!-- Driver's Area -->
+                                <div class="driver-area mb-4">
+                                    <div class="steering">
+                                        <i class="bi bi-truck-front-fill fs-1"></i>
+                                    </div>
+                                    <small class="text-muted d-block mt-2">Front</small>
+                                </div>
+
+                                <!-- Seats -->
+                                <div class="deck">
+                                    <div class="seat-grid">
+                                        <!-- Row 1 -->
+                                       <div class="row">
+                                        <ng-container *ngFor="let seat of seats; track trackSeat">
+                                            <div class="col-3">
+                                                <div class="seat available " [ngClass]="checkIfSeatIsSelected(seat)?'selected text-white bg-primary ':''" (click)="selectSeat(seat)">
+                                                    <span>{{seat}}</span>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Summary -->
+                <div class="col-lg-4">
+                    <div class="card booking-summary">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Booking Summary</h5>
+
+                            <!-- Selected Seats -->
+                            <div class="selected-seats mb-4">
+                                <h6 class="mb-3">Selected Seats</h6>
+                                <div id="selectedSeatsList" class="mb-3">
+                                    <ng-container *ngIf="selectedSeatArray.length == 0; else selectedSeatsBlock">
+                                        <p class="text-muted mb-0">No seats selected</p>
+                                    </ng-container>
+                                    <ng-template #selectedSeatsBlock>
+                                        <div class="selected-seat-tags">
+                                            <ng-container *ngFor="let seat of selectedSeatArray; index as i">
+                                                <span class="badge bg-primary me-2 mb-2">{{seat.seatNo}}</span>
+                                            </ng-container>
+                                        </div>
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <!-- Contact Details -->
+                            <div class="contact-details mb-4">
+                                <h6 class="mb-3">Passenger Details</h6>
+                                <ng-container *ngIf="selectedSeatArray.length > 0; else noPassengers">
+                                    <div *ngFor="let seat of selectedSeatArray; let i = index; track trackSeat" class="passenger-detail mb-4 p-3 rounded border bg-light">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="badge bg-secondary me-2">Seat {{ seat.seatNo }}</span>
+                                            <button type="button" class="btn btn-sm btn-outline-danger ms-auto" (click)="selectedSeatArray.splice(i,1)" title="Remove Passenger">
+                                                <i class="bi bi-x-lg"></i>
+                                            </button>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="passengerName{{i}}">Name <span class="text-danger">*</span></label>
+                                                <input type="text" id="passengerName{{i}}" [(ngModel)]="seat.passengerName" class="form-control" placeholder="Enter Name" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="passengerAge{{i}}">Age <span class="text-danger">*</span></label>
+                                                <input type="number" id="passengerAge{{i}}" [(ngModel)]="seat.age" class="form-control" placeholder="Enter Age" min="1" max="120" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label d-block">Gender <span class="text-danger">*</span></label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" [name]="'gender'+i" value="Male" [(ngModel)]="seat.gender" id="male{{i}}">
+                                                    <label class="form-check-label" for="male{{i}}">Male</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" [name]="'gender'+i" value="Female" [(ngModel)]="seat.gender" id="female{{i}}">
+                                                    <label class="form-check-label" for="female{{i}}">Female</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <ng-template #noPassengers>
+                                    <p class="text-muted">No passenger details to enter. Please select a seat.</p>
+                                </ng-template>
+                            </div>
+
+                            <button [disabled]="selectedSeatArray.length == 0" class="btn btn-primary w-100" (click)="bookTicket()">
+                                <i class="bi bi-credit-card me-2"></i>Book Ticket
+                            </button>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
