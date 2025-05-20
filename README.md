@@ -1,59 +1,73 @@
-# BusTicket
+# 🚌 BusTicket
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+This is a modern **Bus Ticket Booking Web App** built with **Angular 19.2.10**. The application allows users to book bus tickets by selecting travel routes and dates, viewing available buses, and booking multiple seats with passenger details for each.
 
-## Development server
+## 🔧 Tech Stack
+
+- **Frontend:** Angular 19
+- **Styling:** SCSS / TailwindCSS (optional)
+- **State Management:** RxJS / NgRx (optional)
+- **Forms:** Reactive Forms
+- **Testing:** Karma & Jasmine
+
+---
+
+## ✨ Key Features
+
+- 🔍 Select **From** and **To** locations
+- 📅 Choose **Date of Travel**
+- 🚌 View **Available Buses**
+- 🎫 **Select Multiple Seats** per booking
+- 👥 Enter **Passenger Details** per seat
+- ✅ Form validation and booking confirmation
+
+---
+
+## 📁 Project Structure
+
+src/
+│
+├── app/
+│ ├── components/ # Reusable UI components
+│ ├── pages/ # Feature pages (booking, search results, etc.)
+│ ├── services/ # API integration and business logic
+│ ├── models/ # TypeScript interfaces/models
+│ ├── app-routing.module.ts
+│ └── app.module.ts
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- Angular CLI 19.2.10
+- A REST API backend or mock server for testing
+
+### Development Server
 
 To start a local development server, run:
 
 ```bash
 ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
+Open your browser and navigate to http://localhost:4200/. The application will automatically reload when source files change.
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
 ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
+For a complete list of schematics (e.g., components, directives, or pipes), run:
 ng generate --help
-```
 
-## Building
-
-To build the project run:
-
-```bash
+To build the project, use:
 ng build
-```
+💡 Future Enhancements
+Map-based location picker
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Booking history and ticket download
 
-## Running unit tests
+Payment gateway integration
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Email/SMS ticket confirmations
 
-```bash
-ng test
-```
+Mobile-friendly UI (PWA support)
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
